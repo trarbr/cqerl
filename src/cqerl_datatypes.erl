@@ -339,7 +339,7 @@ encode_data({timestamp, now}, _Query) ->
     encode_data({timestamp, MlS}, _Query);
 
 encode_data({varint, Val}, _Query) when is_integer(Val) ->
-    ByteCountF = math:log(Val) / math:log(2) / 8,
+    ByteCountF = math:log(abs(Val)) / math:log(2) / 8,
     ByteCount0 = trunc(ByteCountF),
     ByteCount = if  ByteCount0 == ByteCountF -> ByteCount0;
                     true -> ByteCount0 + 1
